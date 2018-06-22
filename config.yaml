@@ -1,0 +1,34 @@
+---
+rules:
+    -
+        ua_re: Mozilla|Firefox|Opera
+        action:
+            ua_family: browser
+    -
+        ua_re: ^patrol(EditsAfterArticle|Trusted|Undo|ling)?\b
+        action:
+            ua_family: bot-patrol
+    -
+        ua_re: ^127.0.0.1$
+        action:
+            ua_family: bot-127
+    -
+        ua_re: ^Twinkle
+        action:
+            ua_family: tool-Twinkle
+    -
+        ua_re: ^morebits.js
+        action:
+            ua_family: tool-morebits
+    -
+        ua_re: ^wm-antivandal-daemon
+        action:
+            ua_family: bot-wm-antivandal-daemon
+    -
+        ua_re: User:Dungodung
+        action:
+            ua_family: bot-Dungodung
+    -
+        ua_re: ^MOOC-JS
+        action:
+            ua_family: bot-mooc
