@@ -1,34 +1,160 @@
 ---
-rules:
-    -
-        ua_re: Mozilla|Firefox|Opera
-        action:
-            ua_family: browser
-    -
-        ua_re: ^patrol(EditsAfterArticle|Trusted|Undo|ling)?\b
-        action:
-            ua_family: bot-patrol
-    -
-        ua_re: ^127.0.0.1$
-        action:
-            ua_family: bot-127
-    -
-        ua_re: ^Twinkle
-        action:
-            ua_family: tool-Twinkle
-    -
-        ua_re: ^morebits.js
-        action:
-            ua_family: tool-morebits
-    -
-        ua_re: ^wm-antivandal-daemon
-        action:
-            ua_family: bot-wm-antivandal-daemon
-    -
-        ua_re: User:Dungodung
-        action:
-            ua_family: bot-Dungodung
-    -
-        ua_re: ^MOOC-JS
-        action:
-            ua_family: bot-mooc
+api_log:
+    rules:
+        -
+            ua_re: Mozilla|Firefox|Opera
+            action:
+                ua_family: browser
+        -
+            ua_re: ^patrol(EditsAfterArticle|Trusted|Undo|ling)?\b
+            action:
+                ua_family: bot-patrol
+        -
+            ua_re: ^127.0.0.1$
+            action:
+                ua_family: bot-127
+        -
+            ua_re: ^Twinkle
+            action:
+                ua_family: tool-Twinkle
+        -
+            ua_re: ^morebits.js
+            action:
+                ua_family: tool-morebits
+        -
+            ua_re: ^wm-antivandal-daemon
+            action:
+                ua_family: bot-wm-antivandal-daemon
+        -
+            ua_re: User:Dungodung
+            action:
+                ua_family: bot-Dungodung
+        -
+            ua_re: ^MOOC-JS
+            action:
+                ua_family: bot-mooc
+
+
+web_log:
+    rules:
+        -
+            referer_re: Special(:|%3A)RecentChanges
+            action:
+                referer: RecentChanges
+        -
+            referer_re: Special(:|%3A)Contributions
+            action:
+                referer: Contributions
+        -
+            referer_re: Special(:|%3A)Watchlist
+            action:
+                referer: Watchlist
+        -
+            referer_re: :LiveRC
+            action:
+                referer: LiveRC
+        -
+            referer_re: "-"
+            action:
+                referer: "[garbage]"
+
+gadgets:
+    rules:
+        -
+            query_re: modules=
+            action:
+                query_type: Load ResourceLoader modules
+        -
+            query_re: ctype=text(/|%2F)css
+            action:
+                query_type: Load custom CSS
+        -
+            query_re: ctype=text(/|%2F)javascript
+            action:
+                query_type: Load custom JS
+        -
+            title_re: (Special(:|%3A)RecentChanges|Especial:Mudan%C3%A7as_recentes|Especial:CambiosRecientes)
+            action:
+                query_type: RecentChanges
+        -
+            title_re: (Special(:|%3A)Contributions|Speciaal:Bijdragen|Especial:Contribui%C3%A7%C3%B5es)
+            action:
+                query_type: Contributions
+        -
+            title_re: Special(:|%3A)Watchlist|Especial:P%C3%A1ginas_vigiadas|Speciaal:Volglijst
+            action:
+                query_type: Watchlist
+        -
+            query_re: diff=
+            action:
+                query_type: View diff page
+        -
+            path_re: "(?i)[.](png|svg|jpg|gif)"
+            action:
+                query_type: Fetch image
+                ignore: true
+        -
+            query_re: meta=userinfo
+            action:
+                query_type: View user info
+        -
+            path_re: api.php
+            action:
+                query_type: API request
+        -
+            query_re: action=rollback
+            action:
+                query_type: Perform rollback
+        -
+            query_re: search=
+            action:
+                query_type: Perform search
+        -
+            query_re: action=edit
+            action:
+                query_type: Edit page
+        -
+            title_re: "(Wikipedia|Wikip%C3%A9dia):"
+            action:
+                query_type: "Read likely policy page"
+        -
+            title_re: "(Category|Categorie|Categoria):"
+            action:
+                query_type: Read category page
+        -
+            title_re: "(User_talk|Overleg_gebruiker|Usu%C3%A1rio(a)_Discuss%C3%A3o|Utilizador_Discuss%C3%A3o):"
+            action:
+                query_type: User talk page
+        -
+            title_re: "(User|Gebruiker|Usu%C3%A1rio(a)|Utilizador|Wikipedysta):"
+            action:
+                query_type: User page
+        -
+            title_re: "Talk:"
+            action:
+                query_type: View talk page
+        -
+            query_re: action=history
+            action:
+                query_type: Read history page
+        -
+            path_re: ^/beacon|favicon|CentralAutoLogin
+            query_re: BannerLoader
+            action:
+                ignore: true
+        -
+            title_re: "(Special:AbuseLog|Especial:Registro_de_abusos)"
+            action:
+                query_type: View abuse log
+        -
+            title_re: (Special:Log|Especial:Registo)
+            action:
+                query_type: View log
+        -
+            title_re: Special:UserRights
+            action:
+                query_type: View user rights
+        -
+            title_re: Special:CheckUser
+            action:
+                query_type: CheckUser
