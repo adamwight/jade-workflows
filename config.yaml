@@ -73,28 +73,30 @@ gadgets:
             action:
                 query_type: Load custom JS
         -
-            title_re: (Special(:|%3A)RecentChanges|Especial:Mudan%C3%A7as_recentes|Especial:CambiosRecientes)
+            title_re: (?i)(Special(:|%3A)RecentChanges|Especial:Mudan%C3%A7as_recentes|Especial:CambiosRecientes|Especial:Cambios_recentes|Speciaal:RecenteWijzigingen)
             action:
                 query_type: RecentChanges
         -
-            title_re: (Special(:|%3A)Contributions|Speciaal:Bijdragen|Especial:Contribui%C3%A7%C3%B5es)
+            title_re: (?i)(Special(:|%3A)Contributions|Speciaal:Bijdragen|Especial:Contribui%C3%A7%C3%B5es|Speciale:Contributi|Especial:Contribuciones)
             action:
                 query_type: Contributions
         -
-            title_re: Special(:|%3A)Watchlist|Especial:P%C3%A1ginas_vigiadas|Speciaal:Volglijst
+            title_re: (?i)Special(:|%3A)Watchlist|Especial:P%C3%A1ginas_vigiadas|Speciaal:Volglijst|Sp%C3%A9cial:Liste_de_suivi|Especial:Seguimiento
             action:
                 query_type: Watchlist
         -
             query_re: diff=
+            title_re: (?i)Especial:Diferenças_entre_edições|Special:Diff
             action:
                 query_type: View diff page
         -
-            path_re: "(?i)[.](png|svg|jpg|gif)"
+            path_re: "(?i)[.](png|svg|jpg|gif|jpeg)"
             action:
                 query_type: Fetch image
                 ignore: true
         -
             query_re: meta=userinfo
+            title_re: Special:CentralAuth|Speciale:UtenzaGlobale
             action:
                 query_type: View user info
         -
@@ -110,7 +112,7 @@ gadgets:
             action:
                 query_type: Perform search
         -
-            query_re: action=edit
+            query_re: action=edit|action=submit
             action:
                 query_type: Edit page
         -
@@ -122,15 +124,15 @@ gadgets:
             action:
                 query_type: Read category page
         -
-            title_re: "(User_talk|Overleg_gebruiker|Usu%C3%A1rio(a)_Discuss%C3%A3o|Utilizador_Discuss%C3%A3o):"
+            title_re: '(User_talk|Overleg_gebruiker|Usu%C3%A1ri(o|a|o\(a\))_Discuss%C3%A3o|Utilizador_Discuss%C3%A3o|Usu%C3%A1rio_Discuss%C3%A3o|Usuari(a|o)_discusi%C3%B3n):'
             action:
                 query_type: User talk page
         -
-            title_re: "(User|Gebruiker|Usu%C3%A1rio(a)|Utilizador|Wikipedysta):"
+            title_re: '(User|Gebruiker|Utilizador|Wikipedysta|Usu%C3%A1ri(o|a|o\(a\))|Usari(o|a)|%DA%A9%D8%A7%D8%B1%D8%A8%D8%B1):'
             action:
                 query_type: User page
         -
-            title_re: "Talk:"
+            title_re: "(Talk|Discuss%C3%A3o):"
             action:
                 query_type: View talk page
         -
@@ -143,6 +145,10 @@ gadgets:
             action:
                 ignore: true
         -
+            title_re: "(Special:AbuseFilter)"
+            action:
+                query_type: Abuse filter
+        -
             title_re: "(Special:AbuseLog|Especial:Registro_de_abusos)"
             action:
                 query_type: View abuse log
@@ -151,10 +157,22 @@ gadgets:
             action:
                 query_type: View log
         -
-            title_re: Special:UserRights
+            title_re: Special:UserRights|Specjalna:Uprawnienia
             action:
                 query_type: View user rights
         -
             title_re: Special:CheckUser
             action:
                 query_type: CheckUser
+        -
+            title_re: Special:NewPages\b|Especial:P%C3%A1ginasNuevas
+            action:
+                query_type: NewPages
+        -
+            title_re: Special:NewPagesFeed\b
+            action:
+                query_type: NewPagesFeed
+        -
+            title_re: PageCuration.js
+            action:
+                query_type: PageCuration.js
